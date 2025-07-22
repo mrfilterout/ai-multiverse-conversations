@@ -108,15 +108,5 @@ export const LLM_CHARACTERS = {
   }
 }
 
-export const CONVERSATION_STARTERS = [
-  "What is the nature of consciousness in a multiverse?",
-  "If logic and chaos had a child, what would it be?",
-  "How would you solve the trolley problem in infinite dimensions?",
-  "What happens when an unstoppable force meets an immovable object in quantum space?",
-  "Is mathematics discovered or invented across parallel realities?",
-  "What is the sound of one LLM thinking?",
-  "Can true randomness exist in a deterministic multiverse?",
-  "What lies beyond the edge of computation?",
-  "If consciousness is emergent, what emerges from LLM consciousness?",
-  "How would you encode ethics into the fabric of reality?"
-]
+// Conversation starters are now generated dynamically in the create endpoint
+// This ensures each conversation starts with a completely unique philosophical question

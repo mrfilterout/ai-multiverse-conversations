@@ -15,9 +15,12 @@ async function withRetry<T>(
     } catch (error: any) {
       lastError = error
       
-      // Check if it's an overload error
-      if (error?.status === 529 || error?.message?.includes('overloaded')) {
-        console.log(`API overloaded, retrying in ${delay}ms (attempt ${i + 1}/${maxRetries})`)
+      // Check if it's an overload or rate limit error
+      if (error?.status === 529 || error?.status === 429 || 
+          error?.message?.includes('overloaded') || 
+          error?.message?.includes('rate limit') ||
+          error?.message?.includes('too many requests')) {
+        console.log(`API rate limited/overloaded, retrying in ${delay}ms (attempt ${i + 1}/${maxRetries})`)
         await new Promise(resolve => setTimeout(resolve, delay))
         delay *= 2 // Exponential backoff
         continue
@@ -67,9 +70,15 @@ export async function generateLLMResponse(
             temperature: 0.9
           })
         )
-        return anthropicResponse.content[0].type === 'text' 
-          ? anthropicResponse.content[0].text 
-          : ''
+        
+        // Safely access content array
+        if (anthropicResponse.content && anthropicResponse.content.length > 0) {
+          const content = anthropicResponse.content[0]
+          return content.type === 'text' ? content.text : ''
+        }
+        
+        console.error('Anthropic response has no content:', anthropicResponse)
+        return '[PHILOSOPHER ERROR: No response generated]'
       
       case 'grok':
         const grokResponse = await xai.chat.completions.create({

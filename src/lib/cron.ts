@@ -72,7 +72,8 @@ async function generateConversationMessages(conversationId: string, messageCount
     const data = await response.json()
     
     // Wait before generating next message (varied timing for natural feel)
-    const delay = 3000 + Math.random() * 4000 // 3-7 seconds
+    // Increased delay to avoid rate limits
+    const delay = 10000 + Math.random() * 10000 // 10-20 seconds
     setTimeout(() => {
       generateConversationMessages(conversationId, messageCount + 1)
     }, delay)

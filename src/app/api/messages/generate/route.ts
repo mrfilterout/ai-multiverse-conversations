@@ -25,9 +25,9 @@ export async function POST(request: Request) {
     const nextIndex = (lastIndex + 1) % LLM_ORDER.length
     const nextProvider = LLM_ORDER[nextIndex]
     
-    // Build conversation history (limit to last 5 messages to avoid token limits)
-    const recentMessages = messages.slice(-5)
-    const conversationHistory = recentMessages.map(msg => ({
+    // Build conversation history with all messages for coherent conversation
+    // Each LLM should be aware of the entire discussion
+    const conversationHistory = messages.map(msg => ({
       role: msg.role,
       content: msg.content
     }))
