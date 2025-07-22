@@ -11,7 +11,10 @@ export async function GET() {
 
     if (error) throw error
 
-    return NextResponse.json({ conversations })
+    // Add cache headers for conversation list
+    const response = NextResponse.json({ conversations })
+    response.headers.set('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59')
+    return response
   } catch (error) {
     console.error('Error fetching conversations:', error)
     return NextResponse.json({ error: 'Failed to fetch conversations' }, { status: 500 })

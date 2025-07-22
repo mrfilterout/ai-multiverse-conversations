@@ -1,5 +1,9 @@
 'use client'
 
+// Force dynamic rendering to prevent build-time API calls
+export const dynamic = 'force-dynamic'
+export const revalidate = 10 // Revalidate every 10 seconds
+
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Terminal from '@/components/Terminal'

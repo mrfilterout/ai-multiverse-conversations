@@ -26,7 +26,15 @@ export async function GET(
 
     if (msgError) throw msgError
 
-    return NextResponse.json({ conversation, messages })
+    // Add cache headers for individual conversations
+    const response = NextResponse.json({ conversation, messages })
+    // Cache completed conversations longer than active ones
+    if (conversation.status === 'completed') {
+      response.headers.set('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400')
+    } else {
+      response.headers.set('Cache-Control', 'public, s-maxage=2, stale-while-revalidate=10')
+    }
+    return response
   } catch (error) {
     console.error('Error fetching conversation:', error)
     return NextResponse.json({ error: 'Failed to fetch conversation' }, { status: 500 })
