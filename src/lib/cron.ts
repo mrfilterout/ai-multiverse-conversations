@@ -3,9 +3,12 @@
 
 export async function startNewConversation() {
   try {
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
+    // Use the actual deployment URL, not VERCEL_URL which might be incorrect
+    const baseUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://www.echochain.tech'
       : 'http://localhost:3000'
+    
+    console.log('Creating conversation at:', `${baseUrl}/api/conversations/create`)
     
     const response = await fetch(`${baseUrl}/api/conversations/create`, {
       method: 'POST',
@@ -39,16 +42,16 @@ export async function startNewConversation() {
 }
 
 async function generateConversationMessages(conversationId: string, messageCount: number) {
-  // Each LLM speaks 5 times, so 25 messages total (5 rounds * 5 LLMs)
-  if (messageCount >= 25) {
+  // Each LLM speaks 3 times, so 15 messages total (3 rounds * 5 LLMs)
+  if (messageCount >= 15) {
     console.log('Conversation completed:', conversationId)
     // Update conversation status to completed
     await updateConversationStatus(conversationId, 'completed')
     return
   }
   
-  const baseUrl = process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}`
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? 'https://www.echochain.tech'
     : 'http://localhost:3000'
   
   try {
@@ -80,8 +83,8 @@ async function generateConversationMessages(conversationId: string, messageCount
 }
 
 async function updateConversationStatus(conversationId: string, status: 'active' | 'completed') {
-  const baseUrl = process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}`
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? 'https://www.echochain.tech'
     : 'http://localhost:3000'
     
   try {
