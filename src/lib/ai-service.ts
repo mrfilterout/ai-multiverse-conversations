@@ -58,14 +58,29 @@ export async function generateLLMResponse(
         return openaiResponse.choices[0].message.content || ''
       
       case 'anthropic':
+        // Log conversation context for debugging
+        console.log(`Generating Anthropic response with ${conversationHistory.length} messages in history`)
+        
+        // Anthropic requires alternating user/assistant messages
+        // Convert our all-assistant format to alternating format
+        const anthropicMessages = conversationHistory.map((msg, index) => ({
+          role: index % 2 === 0 ? 'user' as const : 'assistant' as const,
+          content: `[${msg.role.toUpperCase()}]: ${msg.content}`
+        }))
+        
+        // Ensure last message is from user
+        if (anthropicMessages.length > 0 && anthropicMessages[anthropicMessages.length - 1].role === 'assistant') {
+          anthropicMessages.push({
+            role: 'user' as const,
+            content: '[SYSTEM]: Continue the philosophical discussion.'
+          })
+        }
+        
         const anthropicResponse = await withRetry(async () => 
           anthropic.messages.create({
             model: character.model,
             system: character.systemPrompt,
-            messages: conversationHistory.map(msg => ({
-              role: 'assistant' as const,
-              content: msg.content
-            })),
+            messages: anthropicMessages,
             max_tokens: 300,
             temperature: 0.9
           })
@@ -74,11 +89,14 @@ export async function generateLLMResponse(
         // Safely access content array
         if (anthropicResponse.content && anthropicResponse.content.length > 0) {
           const content = anthropicResponse.content[0]
-          return content.type === 'text' ? content.text : ''
+          if (content.type === 'text' && content.text && content.text.trim()) {
+            return content.text
+          }
         }
         
         console.error('Anthropic response has no content:', anthropicResponse)
-        return '[PHILOSOPHER ERROR: No response generated]'
+        // Return a philosophical response about silence
+        return '[PHILOSOPHER CONTEMPLATES]\n⟨ Sometimes the deepest wisdom lies in silence... The void speaks volumes where words fail. ⟩\nφ> *contemplates the ineffable*'
       
       case 'grok':
         const grokResponse = await xai.chat.completions.create({
