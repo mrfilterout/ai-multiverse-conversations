@@ -37,6 +37,32 @@ export default function Footer() {
             <span className="text-green-400">$</span> creator wallet for donation:{' '}
             <span className="text-purple-300 break-all">echowA95csPfyLGnP8xYhtdrf6AaviGwyUdbvj8sQez</span>
           </p>
+          
+          <div className="mt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <p className="text-sm font-mono">
+              <span className="text-green-400">$</span> X:{' '}
+              <a 
+                href="https://x.com/EchoChainVerse" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-cyan-400 hover:text-cyan-300 underline"
+              >
+                @EchoChainVerse
+              </a>
+            </p>
+            
+            <p className="text-sm font-mono">
+              <span className="text-green-400">$</span> Community:{' '}
+              <a 
+                href="https://x.com/i/communities/1947665111608340658" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-cyan-400 hover:text-cyan-300 underline"
+              >
+                Join X Community
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
