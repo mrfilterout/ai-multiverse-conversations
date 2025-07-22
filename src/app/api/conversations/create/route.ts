@@ -34,6 +34,14 @@ export async function POST() {
     return NextResponse.json({ conversation, starter })
   } catch (error) {
     console.error('Error creating conversation:', error)
-    return NextResponse.json({ error: 'Failed to create conversation' }, { status: 500 })
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL ? 'Set' : 'Not set',
+      supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY ? 'Set' : 'Not set'
+    })
+    return NextResponse.json({ 
+      error: 'Failed to create conversation',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
   }
 }

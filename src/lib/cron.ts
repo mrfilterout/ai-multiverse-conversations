@@ -15,7 +15,9 @@ export async function startNewConversation() {
     })
     
     if (!response.ok) {
-      throw new Error('Failed to create conversation')
+      const errorData = await response.json()
+      console.error('Create conversation response:', errorData)
+      throw new Error(`Failed to create conversation: ${errorData.details || errorData.error}`)
     }
     
     const data = await response.json()
