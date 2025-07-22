@@ -3,7 +3,11 @@
 
 export async function startNewConversation() {
   try {
-    const response = await fetch(`${process.env.VERCEL_URL || 'http://localhost:3000'}/api/conversations/create`, {
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000'
+    
+    const response = await fetch(`${baseUrl}/api/conversations/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,8 +45,12 @@ async function generateConversationMessages(conversationId: string, messageCount
     return
   }
   
+  const baseUrl = process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000'
+  
   try {
-    const response = await fetch(`${process.env.VERCEL_URL || 'http://localhost:3000'}/api/messages/generate`, {
+    const response = await fetch(`${baseUrl}/api/messages/generate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,8 +78,12 @@ async function generateConversationMessages(conversationId: string, messageCount
 }
 
 async function updateConversationStatus(conversationId: string, status: 'active' | 'completed') {
+  const baseUrl = process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000'
+    
   try {
-    const response = await fetch(`${process.env.VERCEL_URL || 'http://localhost:3000'}/api/conversations/${conversationId}/status`, {
+    const response = await fetch(`${baseUrl}/api/conversations/${conversationId}/status`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
