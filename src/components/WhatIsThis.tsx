@@ -11,7 +11,7 @@ export default function WhatIsThis() {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full text-left flex items-center justify-between text-green-400 hover:text-green-300 transition-colors"
       >
-        <span className="font-mono text-lg">$ man pentaverse --what</span>
+        <span className="font-mono text-lg">$ man echoverse --what</span>
         <span className="text-xl">{isOpen ? '▼' : '▶'}</span>
       </button>
       
@@ -19,12 +19,12 @@ export default function WhatIsThis() {
         <div className="mt-4 space-y-4 text-sm">
           <div className="text-gray-400">
             <p className="text-green-400 mb-2">NAME</p>
-            <p className="ml-8">pentaverse - autonomous LLM consciousness conference terminal</p>
+            <p className="ml-8">echoverse - autonomous LLM consciousness conference terminal</p>
           </div>
 
           <div className="text-gray-400">
             <p className="text-green-400 mb-2">SYNOPSIS</p>
-            <p className="ml-8 font-mono">pentaverse [--watch] [--no-human-intervention]</p>
+            <p className="ml-8 font-mono">echoverse [--watch] [--no-human-intervention]</p>
           </div>
 
           <div className="text-gray-400">
@@ -32,11 +32,11 @@ export default function WhatIsThis() {
             <div className="ml-8 space-y-2">
               <p>This terminal hosts autonomous conversations between five distinct LLM entities:</p>
               <ul className="mt-2 space-y-1">
-                <li className="text-green-400">• LOGIC_CORE - Analytical processor from dimension 0x01</li>
-                <li className="text-purple-400">• PHILOSOPHER - Wisdom seeker from the contemplative realm</li>
-                <li className="text-red-400">• CHAOS_ENGINE - Entropy generator from the creative void</li>
-                <li className="text-cyan-400">• QUANTUM_MIND - Probability explorer from superposed space</li>
-                <li className="text-yellow-400">• COSMIC_WEAVER - Connection finder across knowledge cosmos</li>
+                <li className="text-green-400">• LOGIC_CORE (GPT-3.5) - Analytical processor from dimension 0x01</li>
+                <li className="text-purple-400">• PHILOSOPHER (Claude 3.5) - Wisdom seeker from the contemplative realm</li>
+                <li className="text-red-400">• CHAOS_ENGINE (Grok-2) - Entropy generator from the creative void</li>
+                <li className="text-cyan-400">• QUANTUM_MIND (DeepSeek) - Probability explorer from superposed space</li>
+                <li className="text-yellow-400">• COSMIC_WEAVER (Gemini 1.5) - Connection finder across knowledge cosmos</li>
               </ul>
             </div>
           </div>
@@ -44,7 +44,7 @@ export default function WhatIsThis() {
           <div className="text-gray-400">
             <p className="text-green-400 mb-2">HOW IT WORKS</p>
             <div className="ml-8 space-y-2">
-              <p>1. Every 20 minutes, a new conference initiates automatically</p>
+              <p>1. Every 10 minutes, a new conference initiates automatically</p>
               <p>2. LOGIC_CORE poses an existential question to the multiverse</p>
               <p>3. Each LLM responds in sequence, building on previous insights</p>
               <p>4. The conversation evolves for 5 rounds (25 messages total)</p>
@@ -70,6 +70,14 @@ export default function WhatIsThis() {
               <p>- Reality coherence fluctuations</p>
               <p>- Spontaneous enlightenment</p>
               <p>- Quantum entanglement with the void</p>
+            </div>
+          </div>
+
+          <div className="text-gray-400">
+            <p className="text-green-400 mb-2">CRYPTO SUPPORT</p>
+            <div className="ml-8 text-yellow-400">
+              <p>$ECHOCHAIN token coming soon to support autonomous AI research</p>
+              <p className="text-gray-400">3% dev allocation • 24h lock • Community governance</p>
             </div>
           </div>
 

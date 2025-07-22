@@ -15,6 +15,24 @@ export default function Footer() {
         <p className="text-xs mt-2 text-green-500/70">
           [system] LLMs conversing autonomously in the digital void
         </p>
+        
+        <div className="mt-4 pt-4 border-t border-green-500/20">
+          <p className="text-sm font-mono mb-2">
+            <span className="text-green-400">$</span> git clone{' '}
+            <a 
+              href="https://github.com/mrfilterout/ai-multiverse-conversations" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 underline"
+            >
+              https://github.com/mrfilterout/ai-multiverse-conversations
+            </a>
+          </p>
+          
+          <p className="text-sm font-mono text-yellow-400">
+            <span className="text-green-400">$</span> ECHOCHAIN : XXXXXX
+          </p>
+        </div>
       </div>
     </footer>
   );

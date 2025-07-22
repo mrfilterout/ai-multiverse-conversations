@@ -77,35 +77,82 @@ export default function ConversationPage() {
     // Get background color based on character
     const getBgColor = () => {
       switch(message.role) {
-        case 'openai': return 'bg-green-950/30'
-        case 'anthropic': return 'bg-purple-950/30'
-        case 'grok': return 'bg-red-950/30'
-        case 'deepseek': return 'bg-cyan-950/30'
-        case 'gemini': return 'bg-yellow-950/30'
-        default: return 'bg-gray-950/30'
+        case 'openai': return 'bg-green-900/50'
+        case 'anthropic': return 'bg-purple-900/50'
+        case 'grok': return 'bg-red-900/50'
+        case 'deepseek': return 'bg-cyan-900/50'
+        case 'gemini': return 'bg-yellow-900/50'
+        default: return 'bg-gray-900/50'
       }
     }
 
     // Get border color based on character
     const getBorderColor = () => {
       switch(message.role) {
-        case 'openai': return 'border-green-600'
-        case 'anthropic': return 'border-purple-600'
-        case 'grok': return 'border-red-600'
-        case 'deepseek': return 'border-cyan-600'
-        case 'gemini': return 'border-yellow-600'
-        default: return 'border-gray-600'
+        case 'openai': return 'border-green-500'
+        case 'anthropic': return 'border-purple-500'
+        case 'grok': return 'border-red-500'
+        case 'deepseek': return 'border-cyan-500'
+        case 'gemini': return 'border-yellow-500'
+        default: return 'border-gray-500'
+      }
+    }
+    
+    // Get inline styles for better color visibility
+    const getMessageStyle = () => {
+      switch(message.role) {
+        case 'openai': 
+          return { 
+            backgroundColor: 'rgba(34, 197, 94, 0.1)', 
+            borderColor: '#22c55e',
+            boxShadow: '0 0 20px rgba(34, 197, 94, 0.3)'
+          }
+        case 'anthropic': 
+          return { 
+            backgroundColor: 'rgba(168, 85, 247, 0.1)', 
+            borderColor: '#a855f7',
+            boxShadow: '0 0 20px rgba(168, 85, 247, 0.3)'
+          }
+        case 'grok': 
+          return { 
+            backgroundColor: 'rgba(239, 68, 68, 0.1)', 
+            borderColor: '#ef4444',
+            boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)'
+          }
+        case 'deepseek': 
+          return { 
+            backgroundColor: 'rgba(6, 182, 212, 0.1)', 
+            borderColor: '#06b6d4',
+            boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)'
+          }
+        case 'gemini': 
+          return { 
+            backgroundColor: 'rgba(234, 179, 8, 0.1)', 
+            borderColor: '#eab308',
+            boxShadow: '0 0 20px rgba(234, 179, 8, 0.3)'
+          }
+        default: 
+          return { 
+            backgroundColor: 'rgba(107, 114, 128, 0.1)', 
+            borderColor: '#6b7280'
+          }
       }
     }
     
     return (
       <div key={message.id} className="mb-8">
-        <div className={`rounded-lg border-2 ${getBorderColor()} ${getBgColor()} p-6`}>
+        <div 
+          className="rounded-lg border-2 p-6" 
+          style={getMessageStyle()}
+        >
           {/* Header with LLM name and timestamp */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               {/* Avatar/Icon */}
-              <div className={`w-10 h-10 rounded-full border-2 ${getBorderColor()} ${character.color} flex items-center justify-center text-lg font-bold`}>
+              <div 
+                className={`w-10 h-10 rounded-full border-2 ${character.color} flex items-center justify-center text-lg font-bold`}
+                style={{ borderColor: getMessageStyle().borderColor }}
+              >
                 {character.responseStyle.prefix.charAt(0)}
               </div>
               {/* LLM Name */}
