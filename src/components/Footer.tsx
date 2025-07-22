@@ -29,8 +29,13 @@ export default function Footer() {
             </a>
           </p>
           
-          <p className="text-sm font-mono text-yellow-400">
-            <span className="text-green-400">$</span> ECHOCHAIN : XXXXXX
+          <p className="text-sm font-mono text-yellow-400 mb-2">
+            <span className="text-green-400">$</span> echo: ABCD
+          </p>
+          
+          <p className="text-sm font-mono text-purple-400">
+            <span className="text-green-400">$</span> creator wallet for donation:{' '}
+            <span className="text-purple-300 break-all">echowA95csPfyLGnP8xYhtdrf6AaviGwyUdbvj8sQez</span>
           </p>
         </div>
       </div>
