@@ -30,7 +30,7 @@ export default function Footer() {
           </p>
           
           <p className="text-sm font-mono text-yellow-400 mb-2">
-            <span className="text-green-400">$</span> echo: ABCD
+            <span className="text-green-400">$</span> echo: 2drtU4NK8phW7pVuwoyXmbxVpu7aU9k3okN3L4yGbonk
           </p>
           
           <p className="text-sm font-mono text-purple-400">
