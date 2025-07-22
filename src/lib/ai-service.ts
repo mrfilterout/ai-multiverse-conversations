@@ -2,6 +2,35 @@ import { openai, anthropic, xai, deepseek, gemini } from './ai-clients'
 import { LLM_CHARACTERS } from './ai-prompts'
 import { AIProvider } from '@/types'
 
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  maxRetries: number = 3,
+  delay: number = 1000
+): Promise<T> {
+  let lastError: any
+  
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn()
+    } catch (error: any) {
+      lastError = error
+      
+      // Check if it's an overload error
+      if (error?.status === 529 || error?.message?.includes('overloaded')) {
+        console.log(`API overloaded, retrying in ${delay}ms (attempt ${i + 1}/${maxRetries})`)
+        await new Promise(resolve => setTimeout(resolve, delay))
+        delay *= 2 // Exponential backoff
+        continue
+      }
+      
+      // For other errors, throw immediately
+      throw error
+    }
+  }
+  
+  throw lastError
+}
+
 export async function generateLLMResponse(
   provider: AIProvider,
   conversationHistory: { role: string; content: string }[]
@@ -26,16 +55,18 @@ export async function generateLLMResponse(
         return openaiResponse.choices[0].message.content || ''
       
       case 'anthropic':
-        const anthropicResponse = await anthropic.messages.create({
-          model: character.model,
-          system: character.systemPrompt,
-          messages: conversationHistory.map(msg => ({
-            role: 'assistant' as const,
-            content: msg.content
-          })),
-          max_tokens: 500,
-          temperature: 0.9
-        })
+        const anthropicResponse = await withRetry(async () => 
+          anthropic.messages.create({
+            model: character.model,
+            system: character.systemPrompt,
+            messages: conversationHistory.map(msg => ({
+              role: 'assistant' as const,
+              content: msg.content
+            })),
+            max_tokens: 300,
+            temperature: 0.9
+          })
+        )
         return anthropicResponse.content[0].type === 'text' 
           ? anthropicResponse.content[0].text 
           : ''
