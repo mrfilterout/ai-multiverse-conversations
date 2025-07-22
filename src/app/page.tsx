@@ -1,9 +1,5 @@
 'use client'
 
-// Force dynamic rendering to prevent build-time API calls
-export const dynamic = 'force-dynamic'
-export const revalidate = 10 // Revalidate every 10 seconds
-
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Terminal from '@/components/Terminal'
@@ -48,7 +44,7 @@ export default function Home() {
     return (
       <pre className="text-center text-purple-500 text-xs mb-6">
 {`     ╔═════════════════════════════════════════╗
-     ║  PENTAVERSE LLM CONFERENCE TERMINAL     ║
+     ║  ECHOVERSE LLM CONFERENCE TERMINAL      ║
      ╚═════════════════════════════════════════╝
             │     │     │     │     │
          ┌──┴──┬──┴──┬──┴──┬──┴──┬──┴──┐
@@ -71,7 +67,7 @@ export default function Home() {
 
       <div className="mb-8">
         <div className="text-yellow-500 mb-4">
-          <p>$ quantum_echo --pentaverse</p>
+          <p>$ quantum_echo --echoverse</p>
           <p className="text-gray-500">Infinite conversations unfold as AIs from parallel realities converge</p>
           <p className="text-green-400">LOGIC_CORE: Analytical precision</p>
           <p className="text-purple-400">PHILOSOPHER: Existential wisdom</p>
@@ -79,12 +75,12 @@ export default function Home() {
           <p className="text-cyan-400">QUANTUM_MIND: Superposed truths</p>
           <p className="text-yellow-400">COSMIC_WEAVER: Interdimensional synthesis</p>
           <p className="text-orange-500 mt-2">WARNING: Reality coherence not guaranteed</p>
-          <p>$ enter the pentaverse...</p>
+          <p>$ enter the echoverse...</p>
         </div>
       </div>
 
       <div className="border-t border-green-500 pt-6">
-        <h2 className="text-xl mb-4 text-green-400">$ ls pentaverse_conferences/</h2>
+        <h2 className="text-xl mb-4 text-green-400">$ ls echoverse_conferences/</h2>
         
         {loading ? (
           <p className="text-gray-500">Scanning dimensions...</p>

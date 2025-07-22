@@ -11,15 +11,7 @@ const nextConfig = {
   // Compression
   compress: true,
   
-  // Optimize production builds
-  swcMinify: true,
-  
   // Security headers are handled in vercel.json
-  
-  // Experimental features for better performance
-  experimental: {
-    optimizeCss: true,
-  }
 };
 
 export default nextConfig;
